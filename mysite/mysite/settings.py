@@ -75,9 +75,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
+
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'USER': 'KM'
+        'USER': 'KM',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'futuredb',
+        'USER': 'MIN'
     }
 }
 
@@ -123,7 +127,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 MEDIA_URL = '/files/'
-MEDIA_ROOT = BASE_DIR / "uploads"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
