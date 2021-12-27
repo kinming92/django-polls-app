@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Question
 
-# I added a new comment
+admin.site.register(Question)

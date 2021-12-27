@@ -1,25 +1,23 @@
+import datetime
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
 
-class MyModelName(models.Model):
-    """A typical class defining a model, derived from the Model class."""
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+    
+    def __str__(self):
+        return self.question_text
 
-    # Fields
-    my_field_name = models.CharField(max_length=20, help_text='Enter field documentation')
-    ...
+    def was_published_recently(self):
+        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
-    # Metadata
-    class Meta:
-        ordering = ['-my_field_name']
 
-    # Methods
-    def get_absolute_url(self):
-        """Returns the url to access a particular instance of MyModelName."""
-        return reverse('model-detail-view', args=[str(self.id)])
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
 
     def __str__(self):
-        """String for representing the MyModelName object (in Admin site etc.)."""
-        return self.my_field_name
-
-# I am learning the merge conflict 
+        return self.choice_text
